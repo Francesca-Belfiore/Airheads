@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "./static/css/main.91c7812d.css",
+    "main.js": "./static/js/main.ed1fd7a8.js",
+    "static/media/background.png": "./static/media/background.5c322804053497c1f27b.png",
+    "static/media/World-amico.svg": "./static/media/World-amico.f0e46a4ba8aa67acdc9dff6f83068526.svg",
+    "index.html": "./index.html",
+    "main.91c7812d.css.map": "./static/css/main.91c7812d.css.map",
+    "main.ed1fd7a8.js.map": "./static/js/main.ed1fd7a8.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.91c7812d.css",
+    "static/js/main.ed1fd7a8.js"
+  ]
+}
