@@ -96,7 +96,7 @@ export const getCheapestFlight = (flights, type) => {
 
   // Gestisce il caso in cui non ci sono voli disponibili
   if (itineraries.length === 0) {
-    console.error("no", type, "itineraries found, retrying...");
+    console.error("Nessun volo di", type === "departure" ? "andata" : "ritorno", "trovato, riprovo...");
     return;
   }
 
@@ -122,7 +122,7 @@ export const fetchHotelsByCity = async (cityCode) => {
 
     return response.data;
   } catch (error) {
-    console.error("Errore durante la ricerca degli hotel");
+    console.error("Errore durante la ricerca della lista degli hotel");
   }
 };
 
@@ -139,7 +139,7 @@ export const researchHotel = async (hotelIds, checkInDate, checkOutDate) => {
 
     return response.data;
   } catch (error) {
-    console.error("Errore durante la ricerca degli hotel");
+    console.error("Errore durante la ricerca dell'hotel");
   }
 };
 

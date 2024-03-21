@@ -12,35 +12,28 @@ import { useTheme } from "@mui/material/styles";
 
 import { FlightLand, FlightTakeoff } from "@mui/icons-material";
 
+import styles from "./styles";
+
 const FlightCard = ({ departureAirport, destinationAirport, flight, type }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Card
-      sx={{
-        borderRadius: 2,
-        backgroundColor: "#e2f5ff",
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-        flex: 1
-      }}
+      style={styles.container}
     >
       <CardContent>
         <Box
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-          }}
+          style={styles.content}
         >
-          <Typography variant="h6" component="div" sx={{ color: "#1976d2" }}>
+          <Typography variant="h6" component="div" style={styles.title}>
             {`Volo di ${type === "outbound" ? "andata" : "ritorno"}`}
           </Typography>
 
           <Divider
             orientation="horizontal"
             flexItem
-            style={{ marginTop: 8, marginBottom: 8 }}
+            style={styles.divider}
           />
           <Box
             style={{
@@ -48,58 +41,42 @@ const FlightCard = ({ departureAirport, destinationAirport, flight, type }) => {
               flexDirection: "row",
               justifyContent: "space-between",
               alignItems: "center",
-              marginBottom: 24 // PROVA
+              marginBottom: 24
             }}
           >
             <Typography variant="h5">{departureAirport}</Typography>
 
             <Box
-              style={{
-                display: "flex",
-                flex: 0.4,
-                borderStyle: "dashed",
-                borderWidth: 2,
-              }}
+              style={styles.dashedLine}
             />
 
             {type === "outbound" ? (
-              <FlightTakeoff style={{ width: 36, height: 36 }} />
+              <FlightTakeoff style={styles.icon} />
             ) : (
-              <FlightLand style={{ width: 36, height: 36 }} />
+              <FlightLand style={styles.icon} />
             )}
 
             <Box
-              style={{
-                display: "flex",
-                flex: 0.4,
-                borderStyle: "dashed",
-                borderWidth: 2,
-              }}
+              style={styles.dashedLine}
             />
 
             <Typography variant="h5">{destinationAirport}</Typography>
           </Box>
 
-          <Typography variant="body1" component="div" style={{ marginTop: 8 }}>
+          <Typography variant="body1" component="div" style={styles.price}>
             Prezzo:{" "}
             {parseFloat(
               flight?.pricingOptions[0]?.price?.amount / 1000
             ).toLocaleString("it-IT", { style: "currency", currency: "EUR" })}
           </Typography>
 
-          <Divider
-            orientation="horizontal"
-            flexItem
-            style={{ marginTop: 8, marginBottom: 8 }}
-          />
+          <Divider orientation="horizontal" flexItem style={styles.divider} />
 
           <Button
             variant="outlined"
             color="primary"
             href={flight?.pricingOptions[0].items[0].deepLink}
-            style={{
-              alignSelf: isSmallScreen ? undefined : "flex-end",
-            }}
+            style={styles.button(isSmallScreen)}
             target="_blank"
           >
             Vai al sito

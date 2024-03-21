@@ -8,9 +8,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 
+import { Bed } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
 
-import { Bed } from "@mui/icons-material";
+import styles from "./styles";
 
 const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
   const theme = useTheme();
@@ -23,21 +24,13 @@ const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
 
   return (
     <Card
-      sx={{
-        borderRadius: 2,
-        backgroundColor: "#e5ffef",
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      }}
+      style={styles.container}
     >
       <CardContent>
         <Box
-          style={{
-            display: "flex",
-            flex: 1,
-            flexDirection: "column",
-          }}
+          style={styles.content}
         >
-          <Typography variant="h6" component="div" sx={{ color: "#2e7d32" }}>
+          <Typography variant="h6" component="div" style={styles.title}>
             Soggiorno
           </Typography>
 
@@ -55,7 +48,7 @@ const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
             }}
           >
             <Typography variant="h5">{hotel.hotel.name}</Typography>
-            <Bed style={{ width: 36, height: 36 }} />
+            <Bed style={styles.icon} />
           </Box>
 
           <Box
@@ -67,10 +60,7 @@ const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
             }}
           >
             <Box
-              style={{
-                display: "flex",
-                flexDirection: "row",
-              }}
+              style={styles.dates}
             >
               <Typography variant="body1">
                 Check in: {new Date(checkin).toLocaleDateString("it-IT")}
@@ -79,17 +69,19 @@ const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
               <Divider
                 orientation="vertical"
                 flexItem
-                style={{ marginLeft: 16, marginRight: 16 }}
+                style={styles.dividerVertical}
               />
               <Typography variant="body1">
                 Check out: {new Date(checkout).toLocaleDateString("it-IT")}
               </Typography>
             </Box>
 
-            <Typography variant="body1" align="right" >{nights} notti</Typography>
+            <Typography variant="body1" align="right">
+              {nights} notti
+            </Typography>
           </Box>
 
-          <Typography variant="body1" component="div" style={{ marginTop: 8 }}>
+          <Typography variant="body1" component="div" style={styles.price}>
             Prezzo:{" "}
             {parseFloat(
               hotel?.offers[0]?.price?.total /
@@ -100,7 +92,7 @@ const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
           <Divider
             orientation="horizontal"
             flexItem
-            style={{ marginTop: 8, marginBottom: 8 }}
+            style={styles.divider}
           />
 
           <Button
@@ -109,9 +101,7 @@ const HotelCard = ({ checkin, checkout, hotel, exchangeRates }) => {
             href={encodeURI(
               `https://www.google.com/search?q=${hotel.hotel.name} check in ${checkin} check out ${checkout}`
             )}
-            style={{
-              alignSelf: isSmallScreen ? undefined : "flex-end",
-            }}
+            style={styles.button(isSmallScreen)}
             target="_blank"
           >
             Controlla disponibilità

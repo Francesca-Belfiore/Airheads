@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { ImageList, ImageListItem } from "@mui/material";
+
+import styles from "./styles";
 
 const Images = (destination) => {
   const [images, setImages] = useState([]);
@@ -24,7 +26,7 @@ const Images = (destination) => {
           id: index + 1,
           url: url,
           cols: index === 0 || (index + 1) % 4 === 0 ? 2 : 1,
-          rows: index === 0 || (index + 1) % 4 === 0 ? 2 : 1, //o 5 se metto 4 immagini
+          rows: index === 0 || (index + 1) % 4 === 0 ? 2 : 1,
         }));
 
         // Aggiornamento dello stato delle immagini con quelle ottenute
@@ -44,13 +46,7 @@ const Images = (destination) => {
       cols={images.length < 6 ? images.length : 4}
       rowHeight={120}
       variant="quilted"
-      style={{
-        borderRadius: 8,
-        overflow: "hidden",
-        marginTop: 0,
-        marginBottom: 0,
-        boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-      }}
+      style={styles.imageList}
     >
       {images.map((item, index) => (
         <ImageListItem key={index} cols={item.cols || 1} rows={item.rows || 1}>

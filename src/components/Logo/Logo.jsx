@@ -1,13 +1,11 @@
 import { Box } from "@mui/material";
 
+import styles from "./styles";
+
 const Logo = () => {
   return (
     <Box
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        marginTop: "20px",
-      }}
+      style={styles.logo}
     >
       <svg
         width="259.8"

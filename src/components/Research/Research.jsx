@@ -19,6 +19,8 @@ import { Send } from "@mui/icons-material";
 
 import { LoadingButton } from "@mui/lab";
 
+import styles from "./styles";
+
 const Research = ({
   departureDate,
   returnDate,
@@ -36,7 +38,7 @@ const Research = ({
   const [cancelToken, setCancelToken] = useState(null);
   const [error, setError] = useState("");
 
-  /** funzione che gestisce la ricerca dell'aeroporto di partenza al cambio dell'input */
+  /** Funzione che gestisce la ricerca dell'aeroporto di partenza al cambio dell'input */
   const handleInputChange = async (event) => {
     const value = event.target.value;
 
@@ -88,24 +90,9 @@ const Research = ({
   };
 
   return (
-    <Card
-      style={{
-        margin: "20px auto",
-        padding: "20px",
-        borderRadius: "20px",
-        paddingBottom: !!error ? 0 : 20,
-      }}
-    >
-      <CardContent
-        style={{
-          opacity: loading ? 0.5 : 1,
-          pointerEvents: loading ? "none" : "auto",
-          paddingBottom: !!error ? 16 : 24,
-          paddingLeft: isSmallScreen ? 0 : 20,
-          paddingRight: isSmallScreen ? 0 : 20,
-        }}
-      >
-        <Stack direction={{ sm: "column", md: "row" }} sx={{ gap: 2 }}>
+    <Card style={styles.container(error)}>
+      <CardContent style={styles.content(loading, error, isSmallScreen)}>
+        <Stack style={styles.inputs(isSmallScreen)}>
           <Autocomplete
             freeSolo
             onKeyDown={(event) => {
@@ -136,7 +123,7 @@ const Research = ({
               />
             )}
             onChange={(_, option) => setSearch(option?.iataCode)}
-            sx={{ flex: 1 }}
+            style={styles.searchInput}
           />
           <TextField
             type="date"
@@ -146,7 +133,7 @@ const Research = ({
             required
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            sx={{ minWidth: 200 }}
+            style={styles.dateInput}
             error={!!error}
           />
           <TextField
@@ -157,24 +144,23 @@ const Research = ({
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             label="Data di ritorno"
-            sx={{ minWidth: 200 }}
+            style={styles.dateInput}
             error={!!error}
           />
-
           <LoadingButton
             color="primary"
             onClick={validateFields}
             endIcon={<Send />}
             loading={loading}
             variant="contained"
-            sx={{ minWidth: 160 }}
+            style={styles.loadingButton}
           >
             <span>Andiamo!</span>
           </LoadingButton>
         </Stack>
 
         {!!error && (
-          <Typography variant="body2" color="error" sx={{ mt: 1 }}>
+          <Typography variant="body2" color="error" style={styles.error}>
             {error}
           </Typography>
         )}
