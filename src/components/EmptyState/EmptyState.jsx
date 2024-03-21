@@ -8,10 +8,11 @@ import styles from "./styles";
 const EmptyState = ({ loading }) => {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const style = styles(loading);
 
   return (
-    <Card style={styles.container(loading)}>
-      <CardContent style={styles.content(loading)}>
+    <Card style={style.container}>
+      <CardContent style={style.content}>
         <Typography variant={isSmallScreen ? "h5" : "h4"} align="center">
           Dove si va?
         </Typography>
@@ -22,7 +23,7 @@ const EmptyState = ({ loading }) => {
         <img
           src={logo}
           alt="empty-state"
-          style={styles.picture}
+          style={style.picture}
           draggable={false}
         />
       </CardContent>

@@ -52,6 +52,7 @@ function App() {
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const style = styles(isSmallScreen, loading);
 
   // Richiama i dati dei tassi di cambio da localStorage, se presenti
   const exchangeRates = localStorage.getItem("exchangeRates");
@@ -170,13 +171,13 @@ function App() {
 
       {destination && (
         <Card
-          style={styles.container(loading)}
+          style={style.container}
         >
           <CardContent
-            style={styles.content(isSmallScreen)}
+            style={style.content}
           >
             <Box
-              style={styles.destination(isSmallScreen)}
+              style={style.destination}
             >
               <Typography variant="h5">
                 {destination.cityName || destination.name} (
@@ -186,10 +187,10 @@ function App() {
           </CardContent>
 
           <Box
-            style={styles.columns(isSmallScreen)}
+            style={style.columns}
           >
             <CardContent
-              style={styles.card(isSmallScreen)}
+              style={style.card}
             >
               <Images destination={destination.cityName || destination.name} />
 
@@ -206,7 +207,7 @@ function App() {
             </CardContent>
 
             <CardContent
-              style={styles.card(isSmallScreen)}
+              style={style.card}
             >
               {!!outboundFlight && (
                 <FlightCard
@@ -239,7 +240,7 @@ function App() {
               )}
 
               <CardContent
-                style={styles.price(isSmallScreen)}
+                style={style.price}
               >
                 <Typography variant="h6" align="right">
                   Totale stimato:{" "}
@@ -265,7 +266,7 @@ function App() {
                 <br></br>
 
                 <Box
-                  style={styles.disclaimer}
+                  style={style.disclaimer}
                 >
                   <Info style={{ color: "grey", marginRight: 8 }} />
                   <Typography variant="body2" color="grey" align="left">

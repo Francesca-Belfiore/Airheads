@@ -38,6 +38,8 @@ const Research = ({
   const [cancelToken, setCancelToken] = useState(null);
   const [error, setError] = useState("");
 
+  const style = styles(error, isSmallScreen, loading );
+
   /** Funzione che gestisce la ricerca dell'aeroporto di partenza al cambio dell'input */
   const handleInputChange = async (event) => {
     const value = event.target.value;
@@ -90,9 +92,9 @@ const Research = ({
   };
 
   return (
-    <Card style={styles.container(error)}>
-      <CardContent style={styles.content(loading, error, isSmallScreen)}>
-        <Stack style={styles.inputs(isSmallScreen)}>
+    <Card style={style.container}>
+      <CardContent style={style.content}>
+        <Stack style={style.inputs}>
           <Autocomplete
             freeSolo
             onKeyDown={(event) => {
@@ -123,7 +125,7 @@ const Research = ({
               />
             )}
             onChange={(_, option) => setSearch(option?.iataCode)}
-            style={styles.searchInput}
+            style={style.searchInput}
           />
           <TextField
             type="date"
@@ -133,7 +135,7 @@ const Research = ({
             required
             variant="outlined"
             InputLabelProps={{ shrink: true }}
-            style={styles.dateInput}
+            style={style.dateInput}
             error={!!error}
           />
           <TextField
@@ -144,7 +146,7 @@ const Research = ({
             variant="outlined"
             InputLabelProps={{ shrink: true }}
             label="Data di ritorno"
-            style={styles.dateInput}
+            style={style.dateInput}
             error={!!error}
           />
           <LoadingButton
@@ -153,14 +155,14 @@ const Research = ({
             endIcon={<Send />}
             loading={loading}
             variant="contained"
-            style={styles.loadingButton}
+            style={style.loadingButton}
           >
             <span>Andiamo!</span>
           </LoadingButton>
         </Stack>
 
         {!!error && (
-          <Typography variant="body2" color="error" style={styles.error}>
+          <Typography variant="body2" color="error" style={style.error}>
             {error}
           </Typography>
         )}
