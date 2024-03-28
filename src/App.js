@@ -113,12 +113,12 @@ function App() {
       // Trova gli hotel nell'area indicata
       const hotelList = await fetchHotelsByCity(destination.iataCode);
 
-      // Limitiamo il numero di risultati per non appensatire troppo la richiesta
+      // Limitiamo il numero di risultati per non appensantire troppo la richiesta
       const hotelIds = hotelList.data
         .map((hotel) => hotel.hotelId)
         .slice(0, 20);
 
-      // Ricerca hotel corrispondendi agli Id passati
+      // Ricerca hotel corrispondenti agli Id passati
       const foundHotels = await researchHotel(
         JSON.stringify(hotelIds),
         departureDate,
@@ -133,7 +133,7 @@ function App() {
       })[0];
 
       if (!departureFlight || !returnFlight || !hotelList) {
-        // Se non trova dei voli diretti o degli hotel disponibili per le date selezionate, riprova con un'altra destinazione"
+        // Se non trova dei voli o degli hotel disponibili per le date selezionate, riprova con un'altra destinazione"
         handleSearch();
       } else {
         // Setta i dati sulla destinazione, i voli e l'hotel da mostrare all'utente
